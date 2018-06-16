@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <!-- about -->
+  <div id="about" class="row section bg-dark text-light">
+    <div class="col-md-4 col-sm-12">
+      <h1>About</h1>
+    </div>
+    <div class="col-md-8 col-sm-12">
+      <h2>Stephen Cockerill</h2>
+      <p>
+        Software engineer devoted to doing meaningful work.
+      </p>
+    </div>
+  </div>
+
+  <!-- experience -->
+  {% if experiences %}
+    <div class="row section bg-light">
+      <div class="col-md-4 col-sm-12">
+        <h1>Experience</h1>
+      </div>
+      <div class="col-md-8 col-sm-12">
+
+        {% for experience in experiences %}
+          <div class="box bg-dark text-light">
+            <h2>
+              {{ experience.company }}
+              {% if experience.url %}
+                <a target="_blank" href="{{ experience.url }}">
+                  <img src="{% static 'icons/external-link.svg' %}" />
+                </a>
+              {% endif %}
+            </h2>
+            <div class="small">
+              {{ experience.start_date}} - {{ experience.end_date}}
+            </div>
+            <p>{{ experience.title }}</p>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- skills -->
+  {% if skills %}
+    <div class="row section bg-dark text-light">
+      <div class="col-md-4 col-sm-12">
+        <h1>Skills</h1>
+      </div>
+      <div class="col-md-8 col-sm-12">
+        {% for skill in skills %}
+          <div class="panel panel-default">
+            <div class="panel-heading">{{ skill.name }}</div>
+            <div class="panel-body">
+              <div class="progress">
+                <div class="progress-bar"
+                     role="progressbar"
+                     aria-valuenow="{{ skill.strength }}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     style="width:{{ skill.strength }}%"></div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- education -->
+  {% if educations %}
+    <div class="row section bg-light">
+      <div class="col-md-4 col-sm-12">
+        <h1>Education</h1>
+      </div>
+      <div class="col-md-8 col-sm-12">
+
+        {% for education in educations %}
+          <div class="box bg-dark text-light">
+            <div class="small">2015</div>
+            <h2>
+              {{ education.school }}
+              <a target="_blank" href="http://www.udel.edu/">
+                <img src="{% static 'icons/external-link.svg' %}" />
+              </a>
+            </h2>
+            {% for major in education.majors %}
+              <p>{{ major }}</p>
+            {% endfor %}
+            {% for minor in education.majors %}
+              <div class="small">{{ minor }}</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

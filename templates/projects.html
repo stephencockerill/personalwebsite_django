@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <!-- projects -->
+  <div id="projects" class="row section bg-dark text-light">
+    <div class="col-md-4 col-sm-12">
+      <h1>Projects</h1>
+    </div>
+    <div class="col-md-8 col-sm-12">
+      <div id="projectCarousel" class="carousel slide text-center" data-interval="false">
+        <div class="carousel-inner">
+          {% for project in projects %}
+
+            {% if forloop.first %}
+              <div class="carousel-item active">
+            {% else %}
+              <div class="carousel-item">
+            {% endif %}
+              <img class="project mb-2" src="{% static 'striking_background_2.png' %}">
+              <h2>{{ project.name }}</h2>
+              <p>{{ project.description }}</p>
+              <div class="small">{{ project.stack }}</div>
+            </div>
+
+          {% endfor %}
+        </div>
+
+        <a class="carousel-control-prev" href="#projectCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#projectCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
